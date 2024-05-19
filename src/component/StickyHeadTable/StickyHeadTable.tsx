@@ -32,8 +32,9 @@ const columns: readonly Column[] = [
   { id: "account weeks", label: "Account Weeks" },
   { id: "contract renewal", label: "Contract Renewal" },
   { id: "data plan", label: "Data Plan" },
-  { id: "day calls", label: "Data Calls" },
-  { id: "day mins", label: "Data Mins" },
+  { id: "data usage", label: "Data Usage" },
+  { id: "day calls", label: "Day Calls" },
+  { id: "day mins", label: "Day Mins" },
   { id: "monthly charge", label: "Monthly Charge" },
   { id: "overage fee", label: "Overage Fee" },
   { id: "roam mins", label: "Roam Mins" },
@@ -103,6 +104,11 @@ export default function StickyHeadTable(props: IProps) {
                       sx={{ backgroundColor: "black", color: "white" }}
                     >
                       {row.DataPlan}
+                    </TableCell>
+                    <TableCell
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    >
+                      {row.DataUsage}
                     </TableCell>
                     <TableCell
                       sx={{ backgroundColor: "black", color: "white" }}
