@@ -18,7 +18,7 @@ const pages = [
   // "Regression",
   "Sentiment Analysis",
   // "NER",
-  // "ABSA",
+  "ABSA",
   // "About",
   // "Help",
 ];

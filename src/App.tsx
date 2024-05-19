@@ -7,6 +7,7 @@ import Landing from "./routes/Landing";
 import NavbarLayout from "./layouts/NavbarLayout";
 import ChatbotGemini from "./routes/ChatbotGemini";
 import SentimentAnalysis from "./routes/SentimentAnalysis";
+import ABSA from "./routes/ABSA";
 // import NavbarLayout from "./layouts/NavbarLayout";
 function App() {
   const theme = createTheme({
@@ -30,6 +31,7 @@ function App() {
                   path="Sentiment Analysis"
                   element={<SentimentAnalysis />}
                 />
+                <Route path="ABSA" element={<ABSA />} />
               </Route>
             </Route>
           </Routes>
