@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 
 const pages = [
-  // "Chatbot (Regex)",
+  "Chatbot (Regex)",
   "Chatbot (Gemini)",
   "Classification",
   // "Regression",

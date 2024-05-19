@@ -320,7 +320,7 @@ const Classification = () => {
                 <Button
                   variant="contained"
                   onClick={handleLogisticRegression}
-                  sx={{ margin: 2 }}
+                  sx={{ margin: 2, backgroundColor: "#003333" }}
                 >
                   Logistic Regression
                 </Button>
