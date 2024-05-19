@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import "axios";
-import axios from "axios";
 import {
   Box,
   Grid,
@@ -41,19 +40,6 @@ const ChatbotGemini = () => {
   const handleInputQuestion = (q: string) => {
     setQuestion(q);
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/members")
-      .then((response) => {
-        console.log(response.data.members);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  useEffect(() => {}, [question]);
 
   return (
     <>
@@ -229,6 +215,11 @@ const ChatbotGemini = () => {
                         },
                       }}
                       inputProps={{ style: { color: "white" } }}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          handleClickGemini();
+                        }
+                      }}
                     />
                     <IconButton
                       aria-label="send"

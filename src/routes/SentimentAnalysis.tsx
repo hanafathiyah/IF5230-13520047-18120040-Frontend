@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import "axios";
-import axios from "axios";
 import {
   Box,
   Grid,
@@ -13,33 +13,32 @@ import {
 } from "@mui/material";
 
 interface IQA {
-  question: string;
+  sentiment: string;
   answer: string;
 }
-const Chatbot = () => {
-  const [question, setQuestion] = useState<string>("");
+const SentimentAnalysis = () => {
+  const [sentiment, setSentiment] = useState<string>("");
   // const [answer, setAnswer] = useState<string>("");
   const [arrQA, setArrQA] = useState<IQA[]>([]);
 
-  const handleClickRegex = () => {
-    if (question != "") {
-      axios
-        .post("http://localhost:5000/chatbot_regex", {
-          question: question,
-        })
-        .then((response) => {
-          console.log(response);
-          // setAnswer(response.data);
-          setArrQA([...arrQA, { question: question, answer: response.data }]);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+  const GEMINI_API_KEY = import.meta.env.VITE_API_KEY;
+  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+  const handleClickGemini = async () => {
+    if (sentiment != "") {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+      const prompt = `Analyze the sentiment of the sentence ${sentiment}.The output should be in the format Sentiment: Value.`;
+
+      const result = await model.generateContent(prompt);
+      const response = result.response;
+      const text = response.text();
+      setArrQA([...arrQA, { sentiment: sentiment, answer: text.toString() }]);
     }
   };
 
-  const handleInputQuestion = (q: string) => {
-    setQuestion(q);
+  const handleInputSentiment = (q: string) => {
+    setSentiment(q);
   };
 
   return (
@@ -79,7 +78,7 @@ const Chatbot = () => {
                     marginBottom: 2,
                   }}
                 >
-                  Chatbot (Regex)
+                  Sentiment Analysis
                 </Typography>
               </Stack>
               <Box
@@ -147,7 +146,7 @@ const Chatbot = () => {
                             minWidth: "20%",
                           }}
                         >
-                          {qa.question}
+                          {qa.sentiment}
                         </Box>
                       </Box>
                       <Box
@@ -171,7 +170,7 @@ const Chatbot = () => {
                             height: "max-content",
                           }}
                         >
-                          Bot
+                          SA
                         </Box>
                         <Box
                           sx={{
@@ -208,7 +207,7 @@ const Chatbot = () => {
                     <TextField
                       id="outlined-basic"
                       variant="outlined"
-                      onChange={(e) => handleInputQuestion(e.target.value)}
+                      onChange={(e) => handleInputSentiment(e.target.value)}
                       sx={{
                         width: "100%",
                         "& .MuiInputBase-input.Mui-disabled": {
@@ -218,21 +217,21 @@ const Chatbot = () => {
                       inputProps={{ style: { color: "white" } }}
                       onKeyPress={(e) => {
                         if (e.key === "Enter") {
-                          handleClickRegex();
+                          handleClickGemini();
                         }
                       }}
                     />
                     <IconButton
                       aria-label="send"
                       size="medium"
-                      onClick={handleClickRegex}
+                      onClick={handleClickGemini}
                       sx={{ color: "#EAE2E1", padding: 1 }}
                     >
                       <RiSendPlaneFill />
                     </IconButton>
                     {/* <Button
                       style={{ textTransform: "none" }}
-                      onClick={handleClickRegex}
+                      onClick={handleClickGemini}
                       sx={{ color: "white" }}
                     >
                       Send
@@ -248,4 +247,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default SentimentAnalysis;

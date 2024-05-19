@@ -6,6 +6,7 @@ import Chatbot from "./routes/Chatbot";
 import Landing from "./routes/Landing";
 import NavbarLayout from "./layouts/NavbarLayout";
 import ChatbotGemini from "./routes/ChatbotGemini";
+import SentimentAnalysis from "./routes/SentimentAnalysis";
 // import NavbarLayout from "./layouts/NavbarLayout";
 function App() {
   const theme = createTheme({
@@ -25,6 +26,10 @@ function App() {
                 <Route path="" element={<Landing />} />
                 <Route path="Chatbot (Regex)" element={<Chatbot />} />
                 <Route path="Chatbot (Gemini)" element={<ChatbotGemini />} />
+                <Route
+                  path="Sentiment Analysis"
+                  element={<SentimentAnalysis />}
+                />
               </Route>
             </Route>
           </Routes>

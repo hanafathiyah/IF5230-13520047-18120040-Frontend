@@ -12,15 +12,15 @@ import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 
 const pages = [
-  "Chatbot (Regex)",
+  // "Chatbot (Regex)",
   "Chatbot (Gemini)",
-  "Classification",
-  "Regression",
+  // "Classification",
+  // "Regression",
   "Sentiment Analysis",
-  "NER",
-  "ABSA",
-  "About",
-  "Help",
+  // "NER",
+  // "ABSA",
+  // "About",
+  // "Help",
 ];
 
 function Navbar() {
