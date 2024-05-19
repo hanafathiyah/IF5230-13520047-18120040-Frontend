@@ -14,7 +14,7 @@ import { IoMenu } from "react-icons/io5";
 const pages = [
   // "Chatbot (Regex)",
   "Chatbot (Gemini)",
-  // "Classification",
+  "Classification",
   // "Regression",
   "Sentiment Analysis",
   // "NER",
