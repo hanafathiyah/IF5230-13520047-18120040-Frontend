@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import "axios";
 import axios from "axios";
@@ -16,25 +17,24 @@ interface IQA {
   question: string;
   answer: string;
 }
-const Chatbot = () => {
+const ChatbotGemini = () => {
   const [question, setQuestion] = useState<string>("");
   // const [answer, setAnswer] = useState<string>("");
   const [arrQA, setArrQA] = useState<IQA[]>([]);
 
-  const handleClickRegex = () => {
+  const GEMINI_API_KEY = import.meta.env.VITE_API_KEY;
+  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+  const handleClickGemini = async () => {
     if (question != "") {
-      axios
-        .post("http://localhost:5000/chatbot_regex", {
-          question: question,
-        })
-        .then((response) => {
-          console.log(response);
-          // setAnswer(response.data);
-          setArrQA([...arrQA, { question: question, answer: response.data }]);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+      const prompt = `please answer the question: ${question}! the topic is about technology. please give greetings first`;
+
+      const result = await model.generateContent(prompt);
+      const response = result.response;
+      const text = response.text();
+      setArrQA([...arrQA, { question: question, answer: text.toString() }]);
     }
   };
 
@@ -92,7 +92,7 @@ const Chatbot = () => {
                     marginBottom: 2,
                   }}
                 >
-                  Chatbot (Regex)
+                  Chatbot (Gemini)
                 </Typography>
               </Stack>
               <Box
@@ -233,14 +233,14 @@ const Chatbot = () => {
                     <IconButton
                       aria-label="send"
                       size="medium"
-                      onClick={handleClickRegex}
+                      onClick={handleClickGemini}
                       sx={{ color: "#EAE2E1", padding: 1 }}
                     >
                       <RiSendPlaneFill />
                     </IconButton>
                     {/* <Button
                       style={{ textTransform: "none" }}
-                      onClick={handleClickRegex}
+                      onClick={handleClickGemini}
                       sx={{ color: "white" }}
                     >
                       Send
@@ -256,4 +256,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default ChatbotGemini;

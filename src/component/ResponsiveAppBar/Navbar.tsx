@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 
 const pages = [
-  "Chatbot",
+  "Chatbot (Regex)",
+  "Chatbot (Gemini)",
   "Sentiment Analysis",
   "Classification",
   "About",

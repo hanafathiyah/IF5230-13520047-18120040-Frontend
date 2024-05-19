@@ -39,7 +39,7 @@ const Landing = () => {
                 >
                   Manage Your Tech-Business Using AI!
                 </Typography>
-                <Link to="/chatbot">
+                <Link to="/chatbot%20(regex)">
                   <Button
                     variant="contained"
                     sx={{
