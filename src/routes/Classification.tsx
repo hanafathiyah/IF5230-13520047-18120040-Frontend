@@ -51,18 +51,21 @@ const Classification = () => {
 
   const handleLogisticRegression = () => {
     axios
-      .post("http://localhost:5000/predict_LR", {
-        AccountWeeks: churnPredict.AccountWeeks,
-        ContractRenewal: churnPredict.ContractRenewal,
-        DataPlan: churnPredict.DataPlan,
-        DataUsage: churnPredict.DataUsage,
-        CustServCall: churnPredict.CustServCalls,
-        DayMins: churnPredict.DayMins,
-        DayCalls: churnPredict.DayCalls,
-        MonthlyCharge: churnPredict.MonthlyCharge,
-        OverageFee: churnPredict.OverageFee,
-        RoamMins: churnPredict.RoamMins,
-      })
+      .post(
+        "https://if5230-13520047-18120040-backend-ng2wnxjzcq-uc.a.run.app/predict_LR",
+        {
+          AccountWeeks: churnPredict.AccountWeeks,
+          ContractRenewal: churnPredict.ContractRenewal,
+          DataPlan: churnPredict.DataPlan,
+          DataUsage: churnPredict.DataUsage,
+          CustServCall: churnPredict.CustServCalls,
+          DayMins: churnPredict.DayMins,
+          DayCalls: churnPredict.DayCalls,
+          MonthlyCharge: churnPredict.MonthlyCharge,
+          OverageFee: churnPredict.OverageFee,
+          RoamMins: churnPredict.RoamMins,
+        }
+      )
       .then((response) => {
         console.log(response);
         setResultPredict(response.data);
@@ -75,7 +78,9 @@ const Classification = () => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:5000/telco")
+      .get(
+        "https://if5230-13520047-18120040-backend-ng2wnxjzcq-uc.a.run.app/telco"
+      )
       .then((response) => {
         // console.log(JSON.parse(response.data));
         setArrChurn(JSON.parse(response.data));

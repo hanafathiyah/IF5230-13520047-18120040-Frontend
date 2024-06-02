@@ -24,9 +24,12 @@ const Chatbot = () => {
   const handleClickRegex = () => {
     if (question != "") {
       axios
-        .post("http://localhost:5000/chatbot_regex", {
-          question: question,
-        })
+        .post(
+          "https://if5230-13520047-18120040-backend-ng2wnxjzcq-uc.a.run.app/chatbot_regex",
+          {
+            question: question,
+          }
+        )
         .then((response) => {
           console.log(response);
           // setAnswer(response.data);
